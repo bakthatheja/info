@@ -1,6 +1,6 @@
 name: CI
-#run-name: Scheduled run on ${{ github.run_attempt }}.${{ github.run_number }} - ${{ github.ref_name }} on  $(date +'%Y-%m-%d')
-run-name: Deploy on - ${{ Get-Date -Format 'yyyy-MM-dd' }}
+#run-name: Scheduled run on ${{ github.run_attempt }}.${{ github.run_number }} - ${{ github.ref_name }} on  
+run-name: "${{ format('{0:yyyyMMdd}', github.event.head_commit.timestamp) }}: ${{ github.sha }}"
 
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
