@@ -8,6 +8,21 @@ on:
   # pull_request:
   #   branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      SolutionName:
+        description: provide solution schema name
+        required: true
+        default: ""
+        type: String
+      logLevel:
+        description: "Logging level"
+        required: true
+        default: "info"
+        type: choice
+        options:
+          - info
+          - warn
+          - debug
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
