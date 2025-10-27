@@ -9,6 +9,6 @@
           - uses: actions/checkout@v4
           - name: Get current date
             id: date
-            run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+            run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $env:GITHUB_ENV
           - name: My Job
             run: echo "This is a test job."
