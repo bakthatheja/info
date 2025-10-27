@@ -1,0 +1,13 @@
+name: My Workflow
+run-name: My Workflow Run - ${{ env.CURRENT_DATE }}
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get current date
+        id: date
+        run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: My Job
+        run: echo "This is a test job."
