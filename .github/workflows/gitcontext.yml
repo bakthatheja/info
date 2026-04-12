@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     name: Build Stage
+    runs-on: ubuntu-latest
     steps:
       - name: Print Build Start
         run: echo "🚧 Build stage started"
