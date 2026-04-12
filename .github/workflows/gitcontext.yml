@@ -1,0 +1,19 @@
+name: `${{ github.run_id }}_${{ github.run_number }}_${{ github.run_attempt }}_${{ github.job }} `
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Stage
+    steps:
+      - name: Print Build Start
+        run: echo "🚧 Build stage started"
+
+      - name: Simulate Build
+        run: echo "Building the application..."
+
+      - name: Print Build Complete
+        run: echo "✅ Build stage completed"
+
+
