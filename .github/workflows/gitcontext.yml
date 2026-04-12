@@ -1,5 +1,6 @@
-name: `${{ github.run_id }}_${{ github.run_number }}_${{ github.run_attempt }}_${{ github.job }} `
-
+name: My Workflow
+run-name: >
+  Run-${{ github.run_id }}RunNumber-${{ github.run_number }}-Attempt-${{ github.run_attempt }}
 on:
   workflow_dispatch:
 
