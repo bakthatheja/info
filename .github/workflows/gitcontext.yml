@@ -1,6 +1,6 @@
 name: My Workflow
 run-name: >
-  Run-${{ github.run_id }}RunNumber-${{ github.run_number }}-Attempt-${{ github.run_attempt }}
+  $(date +'%Y.%m.%d').${{ github.run_number }}
 on:
   workflow_dispatch:
 
