@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="BT" constructor="ActionButton" version="0.0.1" display-name-key="ActionButton" description-key="ActionButton description" control-type="virtual" >
+   
+    <external-service-usage enabled="false">
+     
+    </external-service-usage>
+   <property name="value" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="ButtonLabel" display-name-key="ButtonLabel" description-key="provide button label to display" of-type="SingleLine.Text" usage="input" required="true" />
+    <property name="EnableByDefault"
+          display-name-key="EnableByDefault"
+          description-key="Select Yes if button need to enable on inactive also"
+          of-type="Enum"
+          usage="input"
+          required="false" pfx-default-value="false">
+  <value name="yes" display-name-key="yes">true</value>
+  <value name="no" display-name-key="no">false</value>
+</property>
+    <event name="mycustomEvent" display-name-key="mycustomEvent_key" description-key="mycustomEvent_description">
+     </event>
+    <resources>
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.14.0" />
+       <platform-library name="Fluent" version="9.46.2" />
+     
+    </resources>
+    <!-- UNCOMMENT TO ENABLE THE SPECIFIED API
+    <feature-usage>
+      <uses-feature name="Device.captureAudio" required="true" />
+      <uses-feature name="Device.captureImage" required="true" />
+      <uses-feature name="Device.captureVideo" required="true" />
+      <uses-feature name="Device.getBarcodeValue" required="true" />
+      <uses-feature name="Device.getCurrentPosition" required="true" />
+      <uses-feature name="Device.pickFile" required="true" />
+      <uses-feature name="Utility" required="true" />
+      <uses-feature name="WebAPI" required="true" />
+    </feature-usage>
+    -->
+  </control>
+</manifest>
