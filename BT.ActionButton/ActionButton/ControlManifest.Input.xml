@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="BT" constructor="ActionButton" version="0.0.1" display-name-key="ActionButton" description-key="ActionButton description" control-type="virtual" >
+  <control namespace="BT" constructor="ActionButton" version="0.0.1" display-name-key="ActionButton" description-key="ActionButton description" preview-image="img/preview.png" control-type="virtual" >
    
     <external-service-usage enabled="false">
      
