@@ -12,7 +12,7 @@
           description-key="Select Yes if button need to enable on inactive also"
           of-type="Enum"
           usage="input"
-          required="false" pfx-default-value="false">
+          required="false" default-value="false">
   <value name="yes" display-name-key="yes">true</value>
   <value name="no" display-name-key="no">false</value>
 </property>
