@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="BT" constructor="ActionButton" version="0.0.1" display-name-key="ActionButton" description-key="ActionButton description" preview-image="img/preview.png" control-type="virtual" >
+  <control namespace="BT" constructor="ActionButton" version="0.0.4" display-name-key="ActionButton" description-key="ActionButton description" preview-image="img/preview.png" control-type="virtual" >
    
     <external-service-usage enabled="false">
      
@@ -22,7 +22,6 @@
       <code path="index.ts" order="1"/>
       <platform-library name="React" version="16.14.0" />
        <platform-library name="Fluent" version="9.46.2" />
-     
     </resources>
     <!-- UNCOMMENT TO ENABLE THE SPECIFIED API
     <feature-usage>
