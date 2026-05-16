@@ -8,6 +8,8 @@ BT.PCF.Main =
       Attributes: {
         Approve: "btr_approve",
         Reject: "btr_reject",
+        SingleUpload: "btr_singleupload",
+        MultipleUpload: "btr_multipleupload",
       },
     };
     const onload = (executionContext) => {
@@ -18,6 +20,20 @@ BT.PCF.Main =
       formContext.getControl(Fields.Attributes.Reject)?.addEventHandler("mycustomEvent", () => {
         rejectButtonHandler(executionContext);
       });
+      formContext.getControl(Fields.Attributes.SingleUpload)?.addEventHandler("mycustomEvent", (response) => {
+        singleUploadButtonHandler(executionContext, response);
+      });
+      formContext.getControl(Fields.Attributes.MultipleUpload)?.addEventHandler("mycustomEvent", (response) => {
+        multipleUploadButtonHandler(executionContext, response);
+      });
+    };
+    const singleUploadButtonHandler = (executionContext, response) => {
+      const formContext = executionContext.getFormContext();
+      Xrm.Navigation.openAlertDialog({ confirmButtonLabel: "Ok", text: `single file uploaded: ${response.length}`, title: "Alert" });
+    };
+    const multipleUploadButtonHandler = (executionContext, response) => {
+      const formContext = executionContext.getFormContext();
+      Xrm.Navigation.openAlertDialog({ confirmButtonLabel: "Ok", text: `multiple files uploaded: ${response.length}`, title: "Alert" });
     };
     const approveButtonHandler = (executionContext) => {
       const formContext = executionContext.getFormContext();
