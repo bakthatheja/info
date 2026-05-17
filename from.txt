@@ -14,26 +14,41 @@ BT.PCF.Main =
     };
     const onload = (executionContext) => {
       const formContext = executionContext.getFormContext();
-      formContext.getControl(Fields.Attributes.Approve)?.addEventHandler("mycustomEvent", () => {
-        approveButtonHandler(executionContext);
-      });
-      formContext.getControl(Fields.Attributes.Reject)?.addEventHandler("mycustomEvent", () => {
-        rejectButtonHandler(executionContext);
-      });
-      formContext.getControl(Fields.Attributes.SingleUpload)?.addEventHandler("mycustomEvent", (response) => {
-        singleUploadButtonHandler(executionContext, response);
-      });
-      formContext.getControl(Fields.Attributes.MultipleUpload)?.addEventHandler("mycustomEvent", (response) => {
-        multipleUploadButtonHandler(executionContext, response);
-      });
+      if (formContext.ui.getFormType() === 2) {
+        formContext.getControl(Fields.Attributes.Approve)?.addEventHandler("mycustomEvent", () => {
+          approveButtonHandler(executionContext);
+        });
+        formContext.getControl(Fields.Attributes.Reject)?.addEventHandler("mycustomEvent", () => {
+          rejectButtonHandler(executionContext);
+        });
+        formContext.getControl(Fields.Attributes.SingleUpload)?.addEventHandler("mycustomEvent", (response) => {
+          uploadHandler(executionContext, response, Fields.Attributes.SingleUpload);
+        });
+        formContext.getControl(Fields.Attributes.MultipleUpload)?.addEventHandler("mycustomEvent", (response) => {
+          uploadHandler(executionContext, response, Fields.Attributes.MultipleUpload);
+        });
+      }
     };
-    const singleUploadButtonHandler = (executionContext, response) => {
+    const uploadHandler = (executionContext, response, field) => {
       const formContext = executionContext.getFormContext();
-      Xrm.Navigation.openAlertDialog({ confirmButtonLabel: "Ok", text: `single file uploaded: ${response.length}`, title: "Alert" });
-    };
-    const multipleUploadButtonHandler = (executionContext, response) => {
-      const formContext = executionContext.getFormContext();
-      Xrm.Navigation.openAlertDialog({ confirmButtonLabel: "Ok", text: `multiple files uploaded: ${response.length}`, title: "Alert" });
+      const recordId = formContext.data.entity.getId().replace(/[{\}]/g, "");
+      Xrm.Utility.showProgressIndicator("Uploading...");
+      if (response && response.length > 0) {
+        const promises = response.map((file) => {
+          var record = {};
+          record.documentbody = file.fileContent; // Base64 string
+          record.filename = file.fileName; // Text
+          record.subject = file.fileName; // Text
+          record["objectid_btr_pcfdemo@odata.bind"] = `btr_pcfdemos(${recordId})`;
+          return Xrm.WebApi.createRecord("annotation", record);
+        });
+        Promise.all(promises).then(() => {
+          formContext.getAttribute(field)?.setValue("clear");
+          formContext.ui.setFormNotification("Upload success", "INFO", "uploadSuccess");
+          formContext.getControl("Timeline")?.refresh(); // Refresh timeline to show the new notes/attachments
+          Xrm.Utility.closeProgressIndicator();
+        });
+      }
     };
     const approveButtonHandler = (executionContext) => {
       const formContext = executionContext.getFormContext();
